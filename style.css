@@ -1,0 +1,521 @@
+/* ========================================= */
+/* 1. VARIÁVEIS, RESET E FONTES */
+/* ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    /* Paleta de Cores (Doce, Premium) */
+    --cor-rosa-principal: #FFC0CB; /* Rosa Bebê */
+    --cor-rosa-claro: #FFF0F5; /* Branco Sujo de Rosa */
+    --cor-dourado: #C9B037; /* Dourado Clássico */
+    --cor-branco: #FFFFFF;
+    --cor-texto-principal: #333333; /* Marrom Escuro */
+    --cor-sombra: rgba(0, 0, 0, 0.1);
+
+    /* Tipografia */
+    --fonte-titulo: 'Playfair Display', serif; 
+    --fonte-corpo: 'Poppins', sans-serif; 
+}
+
+/* Reset Básico e Scroll */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-branco);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: var(--cor-texto-principal);
+    transition: color 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Container de Conteúdo */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ========================================= */
+/* 2. COMPONENTE: BOTÕES (CHAMATIVOS COM HOVER) */
+/* ========================================= */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px var(--cor-sombra);
+    margin: 5px;
+}
+
+.btn-primary {
+    background-color: var(--cor-dourado);
+    color: var(--cor-branco);
+}
+
+.btn-primary:hover {
+    background-color: #A8902A; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background-color: var(--cor-rosa-principal);
+    color: var(--cor-texto-principal);
+}
+
+.btn-secondary:hover {
+    background-color: #E0B0C0; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================= */
+/* 3. TIPOGRAFIA, SEÇÕES E ANIMAÇÃO */
+/* ========================================= */
+.titulo-principal {
+    font-family: var(--fonte-titulo);
+    font-size: 3rem;
+    color: var(--cor-dourado);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.subtitulo {
+    font-family: var(--fonte-titulo);
+    font-size: 2rem;
+    color: var(--cor-rosa-principal);
+    margin-bottom: 15px;
+}
+
+/* Seções para Animação (ver script.js) */
+section {
+    padding: 100px 0;
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-bg-claro {
+    background-color: var(--cor-rosa-claro);
+}
+
+/* Imagens */
+.img-destaque {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px var(--cor-sombra);
+}
+
+@media (max-width: 768px) {
+    .titulo-principal {
+        font-size: 2.5rem;
+    }
+    .subtitulo {
+        font-size: 1.5rem;
+    }
+}
+
+/* ========================================= */
+/* 4. HEADER E NAVEGAÇÃO */
+/* ========================================= */
+.header {
+    background-color: var(--cor-branco);
+    box-shadow: 0 2px 4px var(--cor-sombra);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo {
+    font-family: var(--fonte-titulo);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--cor-dourado);
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-item a {
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+    padding: 5px 0;
+    position: relative;
+}
+
+.nav-item a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--cor-rosa-principal);
+    transition: width 0.3s ease;
+}
+
+.nav-item a:hover::after,
+.nav-item a.active::after {
+    width: 100%;
+}
+
+/* Menu Hambúrguer (Mobile) - Responsividade */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--cor-texto-principal);
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: var(--cor-rosa-claro);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 4px 6px var(--cor-sombra);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 16px 0;
+    }
+
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
+
+/* ========================================= */
+/* 5. SEÇÃO HOME / HERO E SLIDER */
+/* ========================================= */
+.home {
+    padding-top: 120px; 
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.hero-slider {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.slider-container {
+    position: relative;
+}
+
+.slider-img {
+    animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@media (max-width: 900px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* ========================================= */
+/* 6. SEÇÃO DIFERENCIAL, SOBRE E HISTÓRIA */
+/* ========================================= */
+.diferencial-grid {
+    display: flex; 
+    gap: 30px; 
+    text-align: center; 
+    justify-content: space-around; 
+    flex-wrap: wrap;
+}
+.diferencial-item {
+    max-width: 300px;
+}
+.diferencial-item i {
+    font-size: 3rem; 
+    color: var(--cor-dourado); 
+    margin-bottom: 15px;
+}
+
+.historia-grid {
+    display: flex; 
+    gap: 40px; 
+    margin-top: 40px; 
+    align-items: center; 
+    flex-wrap: wrap;
+}
+
+.historia-texto, .historia-imagem {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* ========================================= */
+/* 7. SEÇÃO CARDÁPIO (PRODUTOS) */
+/* ========================================= */
+.cardapio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.card-produto {
+    background-color: var(--cor-branco);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--cor-sombra);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    border: 1px solid var(--cor-rosa-claro);
+}
+
+.card-produto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-produto img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-dourado);
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    color: var(--cor-texto-principal);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+/* ========================================= */
+/* 8. SEÇÃO DEPOIMENTOS */
+/* ========================================= */
+.depoimento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.depoimento-card {
+    background-color: var(--cor-rosa-claro);
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 5px solid var(--cor-rosa-principal);
+    box-shadow: 0 4px 8px var(--cor-sombra);
+    font-style: italic;
+}
+
+.depoimento-texto {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.depoimento-autor {
+    font-weight: 700;
+    color: var(--cor-dourado);
+    text-align: right;
+    font-style: normal;
+}
+
+/* ========================================= */
+/* 9. SEÇÃO CONTATO E LOCALIZAÇÃO */
+/* ========================================= */
+.contato-grid {
+    display: flex;
+    gap: 40px;
+    margin-top: 50px;
+    flex-wrap: wrap; 
+}
+
+.contato-info, .contato-form {
+    flex: 1;
+    min-width: 300px;
+}
+
+.contato-info a {
+    color: var(--cor-texto-principal);
+    transition: color 0.3s;
+}
+
+.mapa-container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--cor-sombra);
+    height: 300px;
+}
+
+.mapa-container iframe {
+    display: block;
+    border: none;
+}
+
+
+/* ========================================= */
+/* 10. RODAPÉ E WHATSAPP FLUTUANTE */
+/* ========================================= */
+.whatsapp-flutuante {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 99;
+}
+
+.whatsapp-flutuante a {
+    background-color: #25D366; 
+    color: var(--cor-branco);
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-flutuante a:hover {
+    transform: scale(1.1);
+}
+
+.footer {
+    background-color: var(--cor-rosa-principal);
+    color: var(--cor-texto-principal);
+    padding: 40px 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-info, .footer-links, .footer-social {
+    flex: 1;
+    min-width: 200px;
+    text-align: left;
+}
+.footer-info h3, .footer-links h3, .footer-social h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-dourado);
+    margin-bottom: 15px;
+}
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+.social-links a {
+    color: var(--cor-texto-principal);
+    font-size: 1.5rem;
+}
+.social-links a:hover {
+    color: var(--cor-dourado);
+}
+.footer-bottom {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-info, .footer-links, .footer-social {
+        text-align: center;
+    }
+    .social-links {
+        justify-content: center;
+    }
+}
